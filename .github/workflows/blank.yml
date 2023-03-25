@@ -35,7 +35,7 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
       
-     - name: Build with Maven
+      - name: BUild with Maven
       run: mvn -B package --file pom.xml
     - name: build and run tests
       run: mvn test --batch-mode --fail-at-end
