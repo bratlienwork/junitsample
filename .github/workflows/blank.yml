@@ -34,3 +34,17 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      
+     - name: Build with Maven
+      run: mvn -B package --file pom.xml
+    - name: build and run tests
+      run: mvn test --batch-mode --fail-at-end
+    - name: Publish Test Report
+      if: success() || failure()
+      uses: scacap/action-surefire-report@v1
+    - name: invoke chatops pulse
+      uses: muinmomin/webhook-action@v1.0.0
+      with:
+        url: "https://pulse-7-container.qtestnet.com/webhook/f8525ead-f79b-4afb-8873-b374c421fb5c"
+        data: '{"foo": "bard"}'
+      
